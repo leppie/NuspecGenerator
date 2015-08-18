@@ -69,6 +69,7 @@ namespace NuspecGenerator
               },
           };
 
+        Console.WriteLine("Getting dependencies for: {0}", libname);
         depproc.Start();
 
         depproc.StandardInput.WriteLine("(import {0})", libname);
@@ -81,6 +82,11 @@ namespace NuspecGenerator
         var imports = output.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
         lib.Dependencies = imports.Skip(1).Select(Path.GetFileNameWithoutExtension).ToArray();
+
+        foreach (var dep in lib.Dependencies)
+        {
+          Console.WriteLine(" - {0}", dep); 
+        }
 
         //File.WriteAllText(libdll + ".nuspec", content);
       }
@@ -100,6 +106,7 @@ namespace NuspecGenerator
         var depsec = lib.NuspecDoc.Descendants(name).Single();
         foreach (var dep in lib.Dependencies)
         {
+          // the namespace seems to be added in .NET 4.6 regardless if it is target namespace or not
           depsec.Add(XElement.Parse(string.Format("<dependency xmlns=\"http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd\" id=\"{0}\" version=\"[0.9.$TFSREV$]\" />", libs[dep].LibDLL)));
         }
 
