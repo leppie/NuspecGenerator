@@ -107,6 +107,7 @@ namespace NuspecGenerator
         foreach (var dep in lib.Dependencies)
         {
           // the namespace seems to be added in .NET 4.6 regardless if it is target namespace or not
+          // TODO: clean up is this causes issues
           depsec.Add(XElement.Parse(string.Format("<dependency xmlns=\"http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd\" id=\"{0}\" version=\"[0.9.$TFSREV$]\" />", libs[dep].LibDLL)));
         }
 
