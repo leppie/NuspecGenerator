@@ -91,6 +91,9 @@ namespace NuspecGenerator
         //File.WriteAllText(libdll + ".nuspec", content);
       }
 
+      // this is completed wrong from what I can see
+      // it is horrible code too
+      // TODO: remove the trimming and let nuget handle deps
       foreach (var lib in libs.Values)
       {
         foreach (var dep in lib.Dependencies)
