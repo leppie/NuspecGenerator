@@ -98,7 +98,7 @@ namespace NuspecGenerator
       {
         foreach (var dep in lib.Dependencies)
         {
-          lib.Dependencies = lib.Dependencies.Except(libs[dep].Dependencies).ToArray();
+          //lib.Dependencies = lib.Dependencies.Except(libs[dep].Dependencies).ToArray();
         }
       }
 
